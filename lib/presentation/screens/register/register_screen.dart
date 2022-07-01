@@ -4,18 +4,41 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magdsoft_flutter_structure/presentation/screens/login/login_screen.dart';
 import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 import 'package:magdsoft_flutter_structure/presentation/widget/custom_field.dart';
+import 'package:magdsoft_flutter_structure/presentation/widget/toast.dart';
 
 import '../../../business_logic/user_cubit/user_cubit.dart';
 import '../../../business_logic/user_cubit/user_states.dart';
 import '../../widget/custom_button.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController _nameController=TextEditingController();
+
   TextEditingController _emailController=TextEditingController();
+
   TextEditingController _phoneController=TextEditingController();
+
   TextEditingController _passwordController=TextEditingController();
+
   TextEditingController _passwordConfirmController=TextEditingController();
+
   GlobalKey<FormState> registerKey=GlobalKey<FormState>();
+
+
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _passwordController.dispose();
+    _passwordConfirmController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize=MediaQuery.of(context).size;
@@ -95,9 +118,14 @@ class RegisterScreen extends StatelessWidget {
                             }),
                             CustomButton(text:'Register',
                                     onPressed: (){
-                                      if(registerKey.currentState!.validate()){
-                                        UserCubit.get(context).register(_emailController.text, _passwordController.text, _nameController.text, _phoneController.text);
-                                      }
+                              if(_passwordController.text==_passwordConfirmController.text){
+                                if(registerKey.currentState!.validate()){
+                                  UserCubit.get(context).register(_emailController.text, _passwordController.text, _nameController.text, _phoneController.text);
+                                }
+                              }else{
+                                AppToasts.errorToast('Passwords does not match');
+                              }
+
 
                             }),
                           ],

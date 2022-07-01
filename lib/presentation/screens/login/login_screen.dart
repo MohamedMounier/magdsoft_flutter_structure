@@ -9,10 +9,25 @@ import 'package:magdsoft_flutter_structure/presentation/widget/custom_field.dart
 import '../../../business_logic/user_cubit/user_cubit.dart';
 import '../../../business_logic/user_cubit/user_states.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _emailController=TextEditingController();
+
   TextEditingController _passwordController=TextEditingController();
+
   GlobalKey<FormState> loginKey=GlobalKey<FormState>();
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize=MediaQuery.of(context).size;
