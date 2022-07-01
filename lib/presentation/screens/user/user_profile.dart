@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:magdsoft_flutter_structure/presentation/screens/login/login_screen.dart';
 import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 
 import '../../../business_logic/user_cubit/user_cubit.dart';
@@ -58,7 +59,7 @@ class UserProfileScreen extends StatelessWidget {
                       height:61 ,
                       width:152,
                       child: ElevatedButton(onPressed:(){
-                        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (ctx)=>LoginScreen()), (route) => false);
                       },
                           style: ButtonStyle(
                             backgroundColor:MaterialStateProperty.all<Color>(AppColor.logoutColor) ,
