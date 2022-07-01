@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 
@@ -36,7 +35,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           setState(() {
             isShown=!isShown;
           });
-        }, child:Icon(isShown? Icons.remove_red_eye:Icons.remove_red_eye_outlined,color: AppColor.bordersColor,)):SizedBox(),
+        }, child:Icon(isShown? Icons.remove_red_eye:Icons.remove_red_eye_outlined,color: AppColor.bordersColor,)):const SizedBox(),
       ),
       validator: (value){
         if(widget.hint=='Email'){

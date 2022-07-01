@@ -13,7 +13,7 @@ class UserProfileScreen extends StatelessWidget {
       appBar: AppBar(
 
         centerTitle:  true,
-      title: Text('UserData'),
+      title: const Text('UserData'),
         backgroundColor: AppColor.primaryColor,
       ),
       body: BlocBuilder<UserCubit,UserCubitStates>(
@@ -35,24 +35,24 @@ class UserProfileScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               //mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: 150,),
+                const SizedBox(height: 150,),
                 Text('Name is : ${state.accountModel.name}',
-                style: TextStyle(color: AppColor.primaryColor,
+                style: const TextStyle(color: AppColor.primaryColor,
                 fontSize: 25
                 ),
                 ),
                 Text('Email is : ${state.accountModel.email}',
-                  style: TextStyle(color: AppColor.primaryColor,
+                  style:const  TextStyle(color: AppColor.primaryColor,
                       fontSize: 25
                   ),
                 ),
                 Text('Phone is : ${state.accountModel.phone}',
-                  style: TextStyle(color: AppColor.primaryColor,
+                  style: const TextStyle(color: AppColor.primaryColor,
                       fontSize: 25
                   ),
                 ),
 
-                Spacer(),
+                const Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(left: 69.0),
                   child: SizedBox(
@@ -67,12 +67,12 @@ class UserProfileScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10)
                               ))
                           ),
-                          child: Text('Logout',
-                            style: TextStyle(fontSize: 20,
+                          child: const Text('Logout',
+                            style: const TextStyle(fontSize: 20,
                             color: AppColor.white),
                           ))),
                 ),
-                SizedBox(height: 150,),
+                const SizedBox(height: 150,),
               ],
             ),
     );

@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Center(child: Image(image: AssetImage('assets/images/logoFlutter.png'))),
                 SizedBox(height: screenSize.height*.02,),
                 Expanded(child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: AppColor.white,
                       borderRadius: BorderRadius.only(topRight: Radius.circular(40),topLeft: Radius.circular(40))
                   ),
@@ -104,18 +104,5 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  SizedBox customButton(String text,VoidCallback onPressed) {
-    return SizedBox(
-                        height:61 ,
-                        width:152,
-                        child: ElevatedButton(onPressed:onPressed,
-                            style: ButtonStyle(
-                                shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)
-                                ))
-                            ),
-                            child: Text(text,
-                              style: TextStyle(fontSize: 20),
-                            )));
-  }
+
 }
