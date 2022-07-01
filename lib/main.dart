@@ -6,7 +6,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:magdsoft_flutter_structure/business_logic/bloc_observer.dart';
 import 'package:magdsoft_flutter_structure/business_logic/global_cubit/global_cubit.dart';
-import 'package:magdsoft_flutter_structure/business_logic/login_cubit/login_cubit.dart';
 import 'package:magdsoft_flutter_structure/data/local/cache_helper.dart';
 import 'package:magdsoft_flutter_structure/data/remote/dio_helper.dart';
 import 'package:magdsoft_flutter_structure/presentation/router/app_router.dart';
@@ -14,6 +13,8 @@ import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 import 'package:magdsoft_flutter_structure/presentation/widget/toast.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
+
+import 'business_logic/user_cubit/user_cubit.dart';
 
 
 late LocalizationDelegate delegate;
@@ -76,7 +77,7 @@ class _MyAppState extends State<MyApp> {
           create: ((context) => GlobalCubit()),
         ),
         BlocProvider(
-          create: ((context) => LoginCubit()),
+          create: ((context) => UserCubit()),
         ),
       ],
       child: BlocConsumer<GlobalCubit, GlobalState>(

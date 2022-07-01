@@ -11,4 +11,16 @@ class AppRequests {
    return  data;
   }
 
+ static Future<Response>register(String email,String password,String name,String phone)async{
+   var data= await DioHelper.postData(url: registerUrl, body: {
+     'email':email,
+     'password':password,
+     'name':name,
+     'phone':phone,
+
+   });
+
+   return  data;
+ }
+
 }

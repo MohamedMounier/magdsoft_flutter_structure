@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magdsoft_flutter_structure/business_logic/login_cubit/login_cubit.dart';
-import 'package:magdsoft_flutter_structure/business_logic/login_cubit/login_state.dart';
+
 import 'package:magdsoft_flutter_structure/presentation/screens/user/user_profile.dart';
 import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
+import 'package:magdsoft_flutter_structure/presentation/widget/custom_button.dart';
 import 'package:magdsoft_flutter_structure/presentation/widget/custom_field.dart';
 
-class LoginScreen extends StatelessWidget {
+import '../../../business_logic/user_cubit/user_cubit.dart';
+import '../../../business_logic/user_cubit/user_states.dart';
 
+class LoginScreen extends StatelessWidget {
+  TextEditingController _emailController=TextEditingController();
+  TextEditingController _passwordController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size screenSize=MediaQuery.of(context).size;
-    return BlocConsumer<LoginCubit,LoginStates>(
+    return BlocConsumer<UserCubit,UserCubitStates>(
       listener: (context,state) {
         print('state is $state');
         if(state is LoginSuccessInfoState){
@@ -40,6 +44,7 @@ class LoginScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 63.0,vertical: 9.0),
                         child: CustomTextFormField(
+                          controller: _emailController,
                           hint: 'Email',
                           isPass: false,
                         ),
@@ -47,6 +52,7 @@ class LoginScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 63.0,vertical: 9.0),
                         child: CustomTextFormField(
+                          controller: _passwordController,
                           hint: 'Password',
                           isPass: true,
                         ),
@@ -55,13 +61,12 @@ class LoginScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          customButton('Login',(){
-
-
-
-                            LoginCubit.get(context).login('ahmed@gmail.com', '123456');
+                          CustomButton(text: 'Login',
+                                  onPressed: (){
+                            UserCubit.get(context).login(_emailController.text,  _passwordController.text);
                           }),
-                          customButton('Register',(){
+                          CustomButton(text: 'Register',
+                                  onPressed: (){
                             Navigator.pushNamed(context, '/register');
                           }),
                         ],

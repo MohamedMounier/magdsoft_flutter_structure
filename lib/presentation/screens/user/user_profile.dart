@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magdsoft_flutter_structure/business_logic/login_cubit/login_cubit.dart';
-import 'package:magdsoft_flutter_structure/business_logic/login_cubit/login_state.dart';
+
+import '../../../business_logic/user_cubit/user_cubit.dart';
+import '../../../business_logic/user_cubit/user_states.dart';
 
 class UserProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: BlocBuilder<LoginCubit,LoginStates>(
+      body: BlocBuilder<UserCubit,UserCubitStates>(
         builder: (context,state){
           if(state is LoginSuccessInfoState){
             return userInfoWidget(state);
