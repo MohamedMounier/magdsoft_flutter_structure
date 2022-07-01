@@ -96,7 +96,7 @@ class RegisterScreen extends StatelessWidget {
                             CustomButton(text:'Register',
                                     onPressed: (){
                                       if(registerKey.currentState!.validate()){
-                                        UserCubit.get(context).register(_emailController.text, _passwordController.text, _nameController.text, _passwordController.text);
+                                        UserCubit.get(context).register(_emailController.text, _passwordController.text, _nameController.text, _phoneController.text);
                                       }
 
                             }),
