@@ -23,9 +23,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
       controller: widget.controller,
       textAlign: TextAlign.end,
-      obscureText: isShown,
+      obscureText: widget.hint.contains('Pass')?isShown:false,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20)
@@ -38,6 +39,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         }, child:Icon(isShown? Icons.remove_red_eye:Icons.remove_red_eye_outlined,color: AppColor.bordersColor,)):SizedBox(),
       ),
       validator: (value){
+        if(widget.hint=='Email'){
+
+          if(!value!.contains('@')) return 'email should contain @';
+        }
+        if(value!.isEmpty){
+          return 'this field can not be empty';
+        }
+        if(widget.hint=='Phone'){
+    if(value.length>15 ||value.length<11) return 'phone can not be more than 15 numbers or less than 11 numbers';
+        }
+        //validatorFunction(value!);
 
       },
 
@@ -46,4 +58,22 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
 
   }
+  //  String validatorFunction(String value){
+  //   switch (widget.hint) {
+  //     case 'Email':
+  //       if(!value.contains('@')) return 'email should contain @';
+  //
+  //       if(value.isEmpty){
+  //         return 'email can not be empty';
+  //       }else{
+  //
+  //       }
+  //     case 'Phone':
+  //       if(value.length>15 ||value.length<11){
+  //         return 'phone can not be more than 15 numbers or less than 11 numbers';
+  //       }
+  //
+  //   }
+  //
+  // }
 }

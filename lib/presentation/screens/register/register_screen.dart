@@ -15,6 +15,7 @@ class RegisterScreen extends StatelessWidget {
   TextEditingController _phoneController=TextEditingController();
   TextEditingController _passwordController=TextEditingController();
   TextEditingController _passwordConfirmController=TextEditingController();
+  GlobalKey<FormState> registerKey=GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     Size screenSize=MediaQuery.of(context).size;
@@ -27,80 +28,86 @@ class RegisterScreen extends StatelessWidget {
           }
         },
         builder: (context,state) {
-          return Column(
-            children: [
-              SizedBox(height: screenSize.height*.02,),
-              Center(child: Image(image: AssetImage('assets/images/logoFlutter.png'))),
-              SizedBox(height: screenSize.height*.02,),
-              Expanded(child: Container(
-                decoration: BoxDecoration(
-                    color: AppColor.white,
-                    borderRadius: BorderRadius.only(topRight: Radius.circular(40),topLeft: Radius.circular(40))
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(height: screenSize.height*.06,),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 63.0,vertical: 9.0),
-                        child: CustomTextFormField(
-                          controller: _nameController,
-                          hint: 'Name',
-                          isPass: false,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 63.0,vertical: 9.0),
-                        child: CustomTextFormField(
-                          controller: _emailController,
-                          hint: 'Email',
-                          isPass: false,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 63.0,vertical: 9.0),
-                        child: CustomTextFormField(
-                          controller: _phoneController,
-                          hint: 'Phone',
-                          isPass: false,
-                        ),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 63.0,vertical: 9.0),
-                        child: CustomTextFormField(
-                          controller: _passwordController,
-                          hint: 'Password',
-                          isPass: true,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 63.0,vertical: 9.0),
-                        child: CustomTextFormField(
-                          controller: _passwordConfirmController,
-                          hint: 'Confirm Password',
-                          isPass: true,
-                        ),
-                      ),
-                      SizedBox(height: screenSize.height*.08,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          CustomButton(text: 'Login',
-                                  onPressed: (){
-                            Navigator.pushReplacementNamed(context, '/');
-                          }),
-                          CustomButton(text:'Register',
-                                  onPressed: (){
-                            UserCubit.get(context).register(_emailController.text, _passwordController.text, _nameController.text, _passwordController.text);
-                          }),
-                        ],
-                      )
-                    ],
+          return Form(
+            key:registerKey ,
+            child: Column(
+              children: [
+                SizedBox(height: screenSize.height*.02,),
+                Center(child: Image(image: AssetImage('assets/images/logoFlutter.png'))),
+                SizedBox(height: screenSize.height*.02,),
+                Expanded(child: Container(
+                  decoration: BoxDecoration(
+                      color: AppColor.white,
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(40),topLeft: Radius.circular(40))
                   ),
-                ),
-              ))
-            ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: screenSize.height*.06,),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 63.0,vertical: 9.0),
+                          child: CustomTextFormField(
+                            controller: _nameController,
+                            hint: 'Name',
+                            isPass: false,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 63.0,vertical: 9.0),
+                          child: CustomTextFormField(
+                            controller: _emailController,
+                            hint: 'Email',
+                            isPass: false,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 63.0,vertical: 9.0),
+                          child: CustomTextFormField(
+                            controller: _phoneController,
+                            hint: 'Phone',
+                            isPass: false,
+                          ),
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 63.0,vertical: 9.0),
+                          child: CustomTextFormField(
+                            controller: _passwordController,
+                            hint: 'Password',
+                            isPass: true,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 63.0,vertical: 9.0),
+                          child: CustomTextFormField(
+                            controller: _passwordConfirmController,
+                            hint: 'Confirm Password',
+                            isPass: true,
+                          ),
+                        ),
+                        SizedBox(height: screenSize.height*.08,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            CustomButton(text: 'Login',
+                                    onPressed: (){
+                              Navigator.pushReplacementNamed(context, '/');
+                            }),
+                            CustomButton(text:'Register',
+                                    onPressed: (){
+                                      if(registerKey.currentState!.validate()){
+                                        UserCubit.get(context).register(_emailController.text, _passwordController.text, _nameController.text, _passwordController.text);
+                                      }
+
+                            }),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ))
+              ],
+            ),
           );
         }
       ) ,
